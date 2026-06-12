@@ -8,12 +8,7 @@ Production-grade Kubernetes deployment configuration for a full-stack e-commerce
 ┌─────────────────────────────────────────────────────────────┐
 │                      Kubernetes Cluster                       │
 │                                                              │
-│  ┌─────────────┐     ┌─────────────┐     ┌─────────────┐  │
-│  │   Ingress   │     │   Ingress   │     │             │  │
-│  │ shop.local  │     │api.shop.local│    │   Namespace │  │
-│  └──────┬──────┘     └──────┬──────┘     │  afghan-dep │  │
-│         │                   │            └─────────────┘  │
-│         ▼                   ▼                              │
+▼                              │
 │  ┌─────────────┐     ┌─────────────┐                      │
 │  │  Frontend   │     │   Backend   │     ┌─────────────┐  │
 │  │  Service   │     │   Service   │     │   MongoDB   │  │
@@ -61,10 +56,6 @@ Production-grade Kubernetes deployment configuration for a full-stack e-commerce
 - `frontend-svc.yaml` - LoadBalancer (port 80)
 - `backend-svc.yaml` - LoadBalancer (port 5000)
 - `mongo-svc.yaml` - ClusterIP (port 27017)
-
-#### Ingress
-- `frontend-ingress.yaml` - Routes `shop.local` → frontend-svc
-- `backend-ingress.yaml` - Routes `api.shop.local` → backend-svc
 
 #### Autoscaling
 - `hpa.yaml` - Horizontal Pod Autoscaler (backend, 1-10 replicas, 80% CPU)
