@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: frontend-deployment
+  namespace: afghan-dep
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+
+  template:
+    metadata:
+      labels:
+        app: frontend
+
+    spec:
+      containers:
+        - name: frontend-container
+          image: rajeel/afghan-frontend:latest
+          ports:
+            - containerPort: 3000
+
+          env:
+          - name: VITE_API_BASE
+            valueFrom: 
+             configMapKeyRef: 
+              name: config 
+              key: client-url

@@ -1,0 +1,11 @@
+kind: Service 
+apiVersion: v1 
+
+metadata: 
+ name: mongo-svc 
+ namespace: afghan-dep 
+
+spec: 
+ ports: 
+ - port: 27107 
+   targetPort: 27017

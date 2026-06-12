@@ -1,0 +1,97 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: backend-deployment
+  namespace: afghan-dep
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+        - name: backend-conatiner
+          image: rajeel/afghan-backend:latest
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: mongodb-uri
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: jwt-secret
+
+            - name: EMAIL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: email-host
+
+            - name: EMAIL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: email-user
+
+            - name: EMAIL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: email-pass
+
+            - name: EMAIL_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: email-from
+
+            - name: UPSTASH_REDIS_REST_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: redis-url
+
+            - name: UPSTASH_REDIS_REST_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: redis-token
+
+            - name: CLIENT_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: config
+                  key: client-url
+
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "250m"
+
+            limits:  
+             memory: "1Gi"
+             cpu: "500m"
+
+          volumeMounts:
+            - name: upload-storage
+              mountPath: /data/uploads
+
+      volumes:
+        - name: upload-storage
+          persistentVolumeClaim:
+            claimName: upload-pvc
