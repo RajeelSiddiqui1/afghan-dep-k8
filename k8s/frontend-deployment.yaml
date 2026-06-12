@@ -19,9 +19,9 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: rajeel/afghan-frontend:latest
+          image: image
           ports:
-            - containerPort: 3000
+            - containerPort: 80
 
           env:
           - name: VITE_API_BASE
