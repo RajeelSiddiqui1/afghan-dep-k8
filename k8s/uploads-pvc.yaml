@@ -12,3 +12,4 @@ spec:
     requests:
       storage: 5Gi
   volumeName: upload-pv
+  storageClassName: standard
