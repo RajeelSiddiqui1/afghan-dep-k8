@@ -3,7 +3,7 @@ apiVersion: autoscaling/v2
 
 metadata:
   name: backend-hpa
-  namespace: ammax
+  namespace: afghan-dep
 
 spec:
   scaleTargetRef:

@@ -2,12 +2,12 @@ kind: PersistentVolume
 apiVersion: v1
 
 metadata:
-  name: pv
+  name: mongo-pv
   namespace: afghan-dep
 
 spec:
   capacity:
-    storage: 5Gi
+    storage: 1Gi
 
   accessModes:
     - ReadWriteOnce
@@ -15,4 +15,4 @@ spec:
   persistentVolumeReclaimPolicy: Retain
 
   hostPath:
-    path: "/data/pv"
+    path: "/data/mongo/pv"

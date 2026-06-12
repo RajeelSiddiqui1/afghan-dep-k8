@@ -10,5 +10,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 4Gi
-  volumeName: pv
+      storage: 5Gi
+  volumeName: upload-pv
